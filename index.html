@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mumbai Seafood Market — a demo marketplace connecting Mumbai's seafood lovers, vendors and restaurants." />
+  <title>Mumbai Seafood Market | Fresh from the Coast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#092f3b; --navy2:#0d4350; --teal:#087f8c; --mint:#dff5ee;
+      --cream:#f8f7f2; --white:#fff; --ink:#17343b; --muted:#6e8589;
+      --line:#e3ece9; --coral:#ff7a59; --shadow:0 18px 50px rgba(9,47,59,.10);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:"DM Sans",sans-serif;color:var(--ink);background:var(--cream);line-height:1.5}
+    button,input,select,textarea{font:inherit}
+    button,a{-webkit-tap-highlight-color:transparent}
+    button{cursor:pointer}
+    a{color:inherit;text-decoration:none}
+    .announcement{background:var(--navy);color:#d9f2ed;text-align:center;padding:9px 16px;font-size:12px;letter-spacing:.25px}
+    .announcement strong{color:#fff}
+    .site-header{position:sticky;top:0;z-index:20;background:rgba(248,247,242,.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(227,236,233,.9)}
+    .nav-wrap{max-width:1200px;margin:auto;padding:16px 24px;display:flex;align-items:center;gap:28px}
+    .brand{display:flex;align-items:center;gap:10px;min-width:max-content}
+    .brand-mark{width:40px;height:40px;border-radius:14px;background:var(--teal);display:grid;place-items:center;color:white;font-size:22px;box-shadow:0 7px 18px #087f8c35}
+    .brand-name{font-family:Manrope,sans-serif;font-size:16px;font-weight:800;letter-spacing:-.6px;line-height:1.1}
+    .brand-name span{display:block;color:var(--teal);font-size:10px;text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+    .nav-links{display:flex;align-items:center;gap:24px;margin-left:auto;color:#526c71;font-size:13px;font-weight:700}
+    .nav-links a:hover{color:var(--teal)}
+    .nav-actions{display:flex;gap:10px;align-items:center}
+    .icon-btn{border:1px solid var(--line);background:#fff;border-radius:14px;height:42px;min-width:44px;padding:0 13px;display:flex;align-items:center;justify-content:center;gap:8px;color:var(--navy);font-weight:700}
+    .cart-count{background:var(--coral);color:#fff;border-radius:50%;font-size:10px;min-width:18px;height:18px;display:grid;place-items:center}
+    .menu-toggle{display:none}
+    .container{max-width:1200px;margin:auto;padding:0 24px}
+    .hero{padding:48px 0 34px}
+    .hero-panel{position:relative;overflow:hidden;min-height:440px;border-radius:30px;background:var(--navy);display:grid;grid-template-columns:1fr 1fr;align-items:center;color:white}
+    .hero-copy{padding:54px 0 54px 58px;position:relative;z-index:2}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.8px;color:var(--teal);margin-bottom:18px}
+    .eyebrow.light{color:#8ee2d2}
+    .eyebrow:before{content:"";width:24px;height:2px;background:currentColor}
+    h1,h2,h3{font-family:Manrope,sans-serif}
+    h1{font-size:clamp(38px,4.6vw,60px);line-height:1.07;letter-spacing:-2.8px;max-width:540px}
+    h1 em{font-style:normal;color:#82d9c9}
+    .hero-copy p{color:#c5d8d8;max-width:430px;font-size:15px;line-height:1.8;margin:22px 0 28px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:13px;padding:14px 19px;font-weight:800;font-size:13px;transition:transform .18s,background .18s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--coral);color:#fff;box-shadow:0 9px 20px #ff7a5933}
+    .btn-light{background:#fff;color:var(--navy)}
+    .btn-outline{background:transparent;border:1px solid var(--line);color:var(--navy)}
+    .hero-stats{display:flex;gap:26px;margin-top:35px}
+    .stat strong{display:block;font-family:Manrope,sans-serif;font-size:20px}
+    .stat span{font-size:11px;color:#a9c4c6}
+    .hero-art{height:100%;min-height:440px;position:relative;display:flex;align-items:center;justify-content:center}
+    .hero-art:before{content:"";position:absolute;width:390px;height:390px;border-radius:50%;background:#0d5660;right:5%;top:5%}
+    .hero-photo{position:relative;width:82%;height:330px;border-radius:48% 48% 28px 28px;overflow:hidden;transform:rotate(3deg);border:7px solid #ffffff15;box-shadow:0 20px 50px #001f2a70}
+    .hero-photo img{width:100%;height:100%;object-fit:cover}
+    .fresh-badge{position:absolute;left:3%;bottom:14%;z-index:3;background:#fff;color:var(--navy);padding:13px 16px;border-radius:16px;box-shadow:var(--shadow);font-size:12px;font-weight:800;transform:rotate(-5deg)}
+    .fresh-badge span{display:block;color:var(--muted);font-size:10px;font-weight:500;margin-top:2px}
+    .floating-note{position:absolute;right:4%;top:13%;z-index:3;background:#fce9df;color:#9d482f;padding:11px 14px;border-radius:13px;font-size:11px;font-weight:800;transform:rotate(5deg)}
+    .benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:16px 0 58px}
+    .benefit{display:flex;align-items:center;gap:13px;padding:18px 16px;border:1px solid var(--line);border-radius:18px;background:#fff}
+    .benefit-icon{width:42px;height:42px;border-radius:14px;background:var(--mint);display:grid;place-items:center;font-size:20px;flex-shrink:0}
+    .benefit strong{font-size:12px;display:block}
+    .benefit span{display:block;font-size:10px;color:var(--muted);margin-top:3px}
+    .section{padding:22px 0 70px}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:26px}
+    .section-head h2{font-size:clamp(27px,3vw,38px);letter-spacing:-1.5px;line-height:1.15}
+    .section-head p{font-size:13px;color:var(--muted);margin-top:10px}
+    .text-link{font-size:12px;font-weight:800;color:var(--teal);white-space:nowrap}
+    .toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:23px}
+    .search-box{position:relative;flex:1;min-width:230px}
+    .search-box input{width:100%;height:48px;padding:0 16px 0 44px;border:1px solid var(--line);border-radius:14px;background:#fff;outline:none;color:var(--ink)}
+    .search-box input:focus{border-color:var(--teal);box-shadow:0 0 0 3px #087f8c15}
+    .search-icon{position:absolute;left:16px;top:14px;color:#81969a}
+    .category-list{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px 15px;font-size:11px;font-weight:800;color:#61787d}
+    .chip.active,.chip:hover{background:var(--navy);border-color:var(--navy);color:#fff}
+    .product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+    .product-card{background:#fff;border:1px solid var(--line);border-radius:21px;overflow:hidden;transition:transform .2s,box-shadow .2s}
+    .product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .product-image{height:190px;position:relative;background:#eaf3ef;overflow:hidden}
+    .product-image img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
+    .product-card:hover .product-image img{transform:scale(1.05)}
+    .product-tag{position:absolute;top:12px;left:12px;border-radius:8px;padding:6px 9px;background:#fff;color:var(--teal);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.6px}
+    .heart-btn{position:absolute;right:12px;top:12px;width:31px;height:31px;border:0;border-radius:50%;background:#ffffffdd;color:#8b9da0;font-size:17px}
+    .heart-btn.liked{color:#ef6b61}
+    .product-info{padding:17px}
+    .product-meta{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:10px;margin-bottom:8px}
+    .product-info h3{font-size:16px;letter-spacing:-.3px}
+    .product-info .desc{font-size:11px;color:var(--muted);margin-top:6px;min-height:33px}
+    .product-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:17px;padding-top:13px;border-top:1px solid #edf1ef}
+    .price{font-family:Manrope,sans-serif;font-size:19px;font-weight:800;color:var(--navy)}
+    .price small{font:500 10px "DM Sans",sans-serif;color:var(--muted)}
+    .add-btn{width:37px;height:37px;border:0;border-radius:12px;background:var(--teal);color:#fff;font-size:23px;display:grid;place-items:center}
+    .empty-state{grid-column:1/-1;text-align:center;padding:48px 20px;background:#fff;border:1px dashed var(--line);border-radius:20px;color:var(--muted)}
+    .market-banner{background:#e1f2eb;border-radius:26px;padding:38px;display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:center;overflow:hidden}
+    .market-banner h2{font-size:clamp(26px,3vw,37px);letter-spacing:-1.3px;line-height:1.15;max-width:530px}
+    .market-banner p{font-size:13px;color:#5c7978;max-width:500px;margin:14px 0 22px}
+    .banner-visual{font-size:100px;text-align:center;filter:drop-shadow(0 15px 12px #184d3a18)}
+    .vendor-section{padding:76px 0}
+    .vendor-panel{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+    .vendor-image{height:360px;border-radius:26px;overflow:hidden;position:relative;background:#dcece6}
+    .vendor-image img{width:100%;height:100%;object-fit:cover}
+    .vendor-image .image-label{position:absolute;left:18px;bottom:18px;background:#fff;border-radius:14px;padding:13px 16px;font-size:11px;font-weight:800;box-shadow:var(--shadow)}
+    .vendor-copy h2{font-size:clamp(28px,3vw,39px);letter-spacing:-1.5px;line-height:1.15}
+    .vendor-copy>p{color:var(--muted);font-size:13px;line-height:1.8;margin:15px 0 20px}
+    .vendor-points{display:grid;gap:13px;margin:23px 0 26px}
+    .vendor-point{display:flex;gap:12px;align-items:flex-start;font-size:12px;color:#547075}
+    .check{width:22px;height:22px;display:grid;place-items:center;border-radius:8px;background:var(--mint);color:var(--teal);font-weight:900;flex-shrink:0}
+    .vendor-form{display:none;background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;margin-top:20px;box-shadow:var(--shadow)}
+    .vendor-form.open{display:block}
+    .vendor-form h3{font-size:19px;margin-bottom:5px}
+    .vendor-form p{font-size:11px;color:var(--muted);margin-bottom:16px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field.full{grid-column:1/-1}
+    .field label{font-size:10px;font-weight:800;color:#547075}
+    .field input,.field select,.field textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fbfdfc;outline:none;font-size:12px}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal)}
+    .field textarea{min-height:75px;resize:vertical}
+    .form-submit{margin-top:14px;width:100%}
+    .reviews{padding:60px 0;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:25px}
+    .review{border:1px solid var(--line);border-radius:18px;padding:22px}
+    .stars{color:#ed9d47;letter-spacing:2px;font-size:13px}
+    .review p{font-size:12px;color:#5f787d;line-height:1.8;margin:13px 0 18px}
+    .reviewer{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:800}
+    .avatar{width:34px;height:34px;border-radius:50%;background:var(--mint);display:grid;place-items:center;color:var(--teal)}
+    .footer{background:var(--navy);color:#d4e6e5;padding:46px 0 22px}
+    .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;padding-bottom:35px}
+    .footer .brand-name{color:#fff}
+    .footer p{font-size:11px;line-height:1.9;color:#9fb9ba;max-width:280px;margin-top:14px}
+    .footer h4{font-size:12px;color:#fff;margin-bottom:15px}
+    .footer-links{display:grid;gap:10px;font-size:11px;color:#a8c3c3}
+    .footer-links a:hover{color:#8ee2d2}
+    .footer-bottom{border-top:1px solid #ffffff1c;padding-top:18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:10px;color:#86a5a7}
+    .demo-note{font-size:10px;color:#9db4b5}
+    .toast{position:fixed;right:22px;bottom:22px;z-index:60;background:var(--navy);color:#fff;padding:14px 18px;border-radius:13px;box-shadow:var(--shadow);font-size:12px;font-weight:700;transform:translateY(120px);opacity:0;transition:.25s;max-width:min(360px,calc(100vw - 40px))}
+    .toast.show{transform:translateY(0);opacity:1}
+    .overlay{position:fixed;inset:0;background:#061e25a8;z-index:40;opacity:0;visibility:hidden;transition:.2s}
+    .overlay.show{opacity:1;visibility:visible}
+    .cart-drawer{position:fixed;z-index:50;top:0;right:0;height:100dvh;width:min(430px,100%);background:var(--cream);transform:translateX(105%);transition:transform .28s;display:flex;flex-direction:column;box-shadow:-20px 0 60px #001c2430}
+    .cart-drawer.open{transform:translateX(0)}
+    .cart-head{padding:22px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+    .cart-head h2{font-size:22px;letter-spacing:-.8px}
+    .close-btn{border:1px solid var(--line);background:#fff;width:38px;height:38px;border-radius:12px;font-size:20px;color:var(--navy)}
+    .cart-items{padding:18px 24px;overflow:auto;flex:1}
+    .cart-empty{text-align:center;padding:50px 10px;color:var(--muted)}
+    .cart-empty .basket{font-size:45px;margin-bottom:12px}
+    .cart-item{display:grid;grid-template-columns:66px 1fr auto;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}
+    .cart-item img{width:66px;height:66px;object-fit:cover;border-radius:12px}
+    .cart-item h4{font-size:12px}
+    .cart-item .unit{font-size:10px;color:var(--muted);margin-top:3px}
+    .qty-controls{display:flex;align-items:center;gap:8px;margin-top:8px}
+    .qty-controls button{border:1px solid var(--line);background:#fff;width:24px;height:24px;border-radius:7px}
+    .qty-controls span{font-size:11px;font-weight:800}
+    .cart-item-total{font-size:12px;font-weight:800;white-space:nowrap}
+    .cart-foot{padding:20px 24px;border-top:1px solid var(--line);background:#fff}
+    .subtotal{display:flex;justify-content:space-between;font-size:13px;font-weight:800;margin-bottom:6px}
+    .delivery-note{font-size:10px;color:var(--muted);margin-bottom:15px}
+    .cart-foot .btn{width:100%}
+    .modal-backdrop{position:fixed;inset:0;z-index:55;background:#061e25a8;display:none;place-items:center;padding:20px}
+    .modal-backdrop.show{display:grid}
+    .modal{max-width:440px;width:100%;background:#fff;border-radius:22px;padding:27px;box-shadow:var(--shadow)}
+    .modal h3{font-size:22px;margin-bottom:8px}
+    .modal p{font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:18px}
+    .modal-actions{display:flex;gap:10px;flex-wrap:wrap}
+    @media(max-width:950px){
+      .nav-links{gap:14px}.hero-copy{padding-left:34px}.hero-panel{grid-template-columns:1fr 0.9fr}
+      .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.benefits{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:680px){
+      .nav-wrap{padding:12px 16px;gap:10px}.nav-links{display:none;position:absolute;left:0;right:0;top:68px;background:var(--cream);padding:18px 24px 22px;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:17px}
+      .nav-links.show{display:flex}.menu-toggle{display:flex}.nav-actions{margin-left:auto}.nav-actions .cart-label{display:none}
+      .container{padding:0 16px}.hero{padding-top:24px}.hero-panel{grid-template-columns:1fr;border-radius:23px}
+      .hero-copy{padding:35px 25px 10px}.hero-copy p{font-size:13px;margin:16px 0 22px}h1{font-size:42px;letter-spacing:-2px}
+      .hero-stats{gap:22px;margin-top:25px}.hero-art{min-height:260px;height:260px}.hero-art:before{width:250px;height:250px;right:15%;top:0}
+      .hero-photo{height:220px;width:75%;border-width:5px}.fresh-badge{left:7%;bottom:12%}.floating-note{right:5%;top:8%}
+      .benefits{padding-bottom:38px;gap:9px}.benefit{padding:12px 10px;gap:9px}.benefit-icon{width:34px;height:34px;font-size:16px}.benefit strong{font-size:10px}.benefit span{font-size:9px}
+      .section{padding-bottom:48px}.section-head{align-items:flex-start;flex-direction:column;gap:10px}.section-head h2{font-size:31px}
+      .toolbar{align-items:stretch}.category-list{overflow-x:auto;flex-wrap:nowrap;padding-bottom:5px}.chip{white-space:nowrap}
+      .product-grid{gap:11px}.product-image{height:145px}.product-info{padding:12px}.product-info h3{font-size:14px}.product-info .desc{font-size:10px}.product-meta{font-size:9px}.price{font-size:16px}.add-btn{width:32px;height:32px}
+      .market-banner{padding:25px 22px;grid-template-columns:1fr}.banner-visual{display:none}.market-banner h2{font-size:29px}
+      .vendor-section{padding:50px 0}.vendor-panel{grid-template-columns:1fr;gap:26px}.vendor-image{height:250px}.vendor-copy h2{font-size:32px}
+      .form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}
+      .review-grid{grid-template-columns:1fr}.reviews{padding:44px 0}
+      .footer-grid{grid-template-columns:1fr 1fr;gap:26px 18px}.footer-grid>div:first-child{grid-column:1/-1}
+      .footer-bottom{font-size:9px}.stat strong{font-size:18px}
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">🐟 Fresh catch, local connections. <strong>Made for Mumbai.</strong> <span> · Demo marketplace</span></div>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="#home" aria-label="Mumbai Seafood Market home">
+        <div class="brand-mark">≋</div>
+        <div class="brand-name">Mumbai Seafood<span>Market</span></div>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Home</a><a href="#shop">Shop seafood</a><a href="#our-story">Our story</a><a href="#vendors">For vendors</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+        <button class="icon-btn" id="cartOpen" aria-label="Open shopping cart">🛒 <span class="cart-label">Cart</span> <span class="cart-count" id="cartCount">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container" id="home">
+      <div class="hero-panel">
+        <div class="hero-copy">
+          <div class="eyebrow light">From the coast to your kitchen</div>
+          <h1>Mumbai's freshest catch, <em>closer to you.</em></h1>
+          <p>Discover quality seafood from local sellers, compare your favourites, and bring the taste of the coast home.</p>
+          <a class="btn btn-primary" href="#shop">Explore seafood <span aria-hidden="true">↗</span></a>
+          <div class="hero-stats">
+            <div class="stat"><strong>Local</strong><span>Mumbai vendors</span></div>
+            <div class="stat"><strong>Fresh</strong><span>Coastal favourites</span></div>
+            <div class="stat"><strong>Easy</strong><span>One simple marketplace</span></div>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="floating-note">THE COAST, CURATED ✦</div>
+          <div class="hero-photo"><img src="https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&w=1000&q=85" alt="Fresh seafood arranged for a market" onerror="this.src='https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=1000&q=85'"></div>
+          <div class="fresh-badge">A better seafood run<span>Shop local. Eat well.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container benefits" aria-label="Marketplace benefits">
+      <div class="benefit"><div class="benefit-icon">🌊</div><div><strong>Coastal favourites</strong><span>Popular picks, all in one place</span></div></div>
+      <div class="benefit"><div class="benefit-icon">🤝</div><div><strong>Local vendor focus</strong><span>Built to support sellers</span></div></div>
+      <div class="benefit"><div class="benefit-icon">🔎</div><div><strong>Easy discovery</strong><span>Search and filter with ease</span></div></div>
+      <div class="benefit"><div class="benefit-icon">🧊</div><div><strong>Freshness first</strong><span>Quality is part of the story</span></div></div>
+    </section>
+
+    <section class="section container" id="shop">
+      <div class="section-head">
+        <div><div class="eyebrow">The daily catch</div><h2>Find your seafood favourite.</h2><p>Browse a sample selection of seafood loved across Mumbai.</p></div>
+        <a class="text-link" href="#vendors">Are you a seller? Join us ↗</a>
+      </div>
+      <div class="toolbar">
+        <div class="search-box"><span class="search-icon">⌕</span><input type="search" id="searchInput" placeholder="Search pomfret, prawns, surmai..." aria-label="Search seafood"></div>
+        <div class="category-list" id="categoryList">
+          <button class="chip active" data-category="All">All seafood</button>
+          <button class="chip" data-category="Fish">Fish</button>
+          <button class="chip" data-category="Shellfish">Shellfish</button>
+          <button class="chip" data-category="Specials">Coastal specials</button>
+        </div>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section class="container section" id="our-story">
+      <div class="market-banner">
+        <div>
+          <div class="eyebrow">A marketplace with a local heart</div>
+          <h2>Good seafood. Stronger local connections.</h2>
+          <p>Our idea is simple: make seafood easier to discover while giving Mumbai's independent fish sellers a digital storefront to reach more people.</p>
+          <a class="btn btn-light" href="#vendors">Become a marketplace vendor ↗</a>
+        </div>
+        <div class="banner-visual" aria-hidden="true">🐟 🦐</div>
+      </div>
+    </section>
+
+    <section class="vendor-section container" id="vendors">
+      <div class="vendor-panel">
+        <div class="vendor-image">
+          <img src="https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format&fit=crop&w=1000&q=85" alt="Seafood being prepared at a market" onerror="this.src='https://images.unsplash.com/photo-1579954115563-e72bf1381629?auto=format&fit=crop&w=1000&q=85'">
+          <div class="image-label">For Mumbai's seafood community <span style="color:var(--teal)">✦</span></div>
+        </div>
+        <div class="vendor-copy">
+          <div class="eyebrow">For local vendors</div>
+          <h2>Your catch deserves a bigger audience.</h2>
+          <p>Bring your seafood business online. This demo vendor section shows how sellers could express interest in listing their products on the marketplace.</p>
+          <div class="vendor-points">
+            <div class="vendor-point"><span class="check">✓</span><span><strong>Showcase your products</strong><br>Help customers discover your daily selection.</span></div>
+            <div class="vendor-point"><span class="check">✓</span><span><strong>Reach more local buyers</strong><br>Connect with households, restaurants and retailers.</span></div>
+            <div class="vendor-point"><span class="check">✓</span><span><strong>Build customer trust</strong><br>Share your location and the story behind your catch.</span></div>
+          </div>
+          <button class="btn btn-primary" id="vendorToggle">Register interest <span>↗</span></button>
+          <form class="vendor-form" id="vendorForm">
+            <h3>Vendor interest form</h3><p>Demo only — details are not sent to a server.</p>
+            <div class="form-grid">
+              <div class="field"><label for="vendorName">Your name</label><input id="vendorName" required placeholder="Full name"></div>
+              <div class="field"><label for="vendorBusiness">Business name</label><input id="vendorBusiness" required placeholder="Shop / business"></div>
+              <div class="field"><label for="vendorPhone">Phone number</label><input id="vendorPhone" required type="tel" placeholder="Contact number"></div>
+              <div class="field"><label for="vendorArea">Mumbai area</label><select id="vendorArea" required><option value="">Choose area</option><option>Versova</option><option>Sassoon Dock / Colaba</option><option>Mahim</option><option>Worli</option><option>Vasai–Virar</option><option>Other Mumbai area</option></select></div>
+              <div class="field full"><label for="vendorProducts">What do you sell?</label><textarea id="vendorProducts" required placeholder="E.g. pomfret, prawns, surmai..."></textarea></div>
+            </div>
+            <button class="btn btn-primary form-submit" type="submit">Submit interest (demo)</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews">
+      <div class="container">
+        <div class="section-head"><div><div class="eyebrow">Made for everyday meals</div><h2>A simpler way to shop local.</h2><p>Example testimonials for the concept demo.</p></div></div>
+        <div class="review-grid">
+          <article class="review"><div class="stars">★★★★★</div><p>“I like the idea of seeing different seafood options in one place instead of searching across multiple sellers.”</p><div class="reviewer"><div class="avatar">AK</div><div>Sample customer<br><span style="font-weight:500;color:var(--muted)">Andheri, Mumbai</span></div></div></article>
+          <article class="review"><div class="stars">★★★★★</div><p>“A digital storefront could help small vendors present their products and connect with more neighbourhood buyers.”</p><div class="reviewer"><div class="avatar">RV</div><div>Sample vendor<br><span style="font-weight:500;color:var(--muted)">Versova, Mumbai</span></div></div></article>
+          <article class="review"><div class="stars">★★★★★</div><p>“Searching by seafood type and adding items to a basket makes the shopping concept easy to understand.”</p><div class="reviewer"><div class="avatar">PM</div><div>Sample home cook<br><span style="font-weight:500;color:var(--muted)">Dadar, Mumbai</span></div></div></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><a class="brand" href="#home"><div class="brand-mark">≋</div><div class="brand-name">Mumbai Seafood<span>Market</span></div></a><p>A digital seafood marketplace concept connecting Mumbai's local sellers with seafood lovers and food businesses.</p></div>
+        <div><h4>Explore</h4><div class="footer-links"><a href="#shop">Shop seafood</a><a href="#our-story">Our story</a><a href="#vendors">For vendors</a></div></div>
+        <div><h4>Popular seafood</h4><div class="footer-links"><a href="#shop" data-footer-category="Fish">Pomfret</a><a href="#shop" data-footer-category="Shellfish">Prawns</a><a href="#shop" data-footer-category="Fish">Surmai</a><a href="#shop" data-footer-category="Specials">Bombil</a></div></div>
+        <div><h4>Contact</h4><div class="footer-links"><a href="mailto:hello@example.com">hello@example.com</a><span>Mumbai, Maharashtra</span><span>Vendor enquiries welcome</span></div></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Mumbai Seafood Market · Student project demo</span><span class="demo-note">Sample prices and products. No real orders or payments are processed.</span></div>
+    </div>
+  </footer>
+
+  <div class="overlay" id="overlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart" aria-modal="true" role="dialog">
+    <div class="cart-head"><h2>Your basket <span id="cartTitleCount" style="color:var(--muted);font-size:14px">(0)</span></h2><button class="close-btn" id="cartClose" aria-label="Close cart">×</button></div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-foot"><div class="subtotal"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div><div class="delivery-note">Delivery fees and availability would be confirmed by a real vendor.</div><button class="btn btn-primary" id="checkoutBtn">Continue to checkout ↗</button></div>
+  </aside>
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h3 id="modalTitle">Demo checkout</h3>
+      <p>This is a front-end student project. Your basket works, but real orders, delivery scheduling and online payments have not been connected.</p>
+      <div class="modal-actions"><button class="btn btn-primary" id="confirmDemo">Got it</button><button class="btn btn-outline" id="backToShop">Back to shopping</button></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const products = [
+      {id:1,name:"Golden Pomfret",category:"Fish",tag:"Customer favourite",price:850,unit:"500 g",area:"Versova",desc:"A premium coastal classic for special meals.",img:"https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80"},
+      {id:2,name:"Fresh Prawns",category:"Shellfish",tag:"Popular pick",price:420,unit:"500 g",area:"Sassoon Dock",desc:"Versatile prawns for curries, fry and grills.",img:"https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=800&q=80"},
+      {id:3,name:"Surmai Steaks",category:"Fish",tag:"Coastal favourite",price:590,unit:"500 g",area:"Mahim",desc:"Firm-textured fish, great for a spicy fry.",img:"https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format&fit=crop&w=800&q=80"},
+      {id:4,name:"Bombil (Bombay Duck)",category:"Specials",tag:"Mumbai classic",price:280,unit:"500 g",area:"Versova",desc:"A much-loved local seafood speciality.",img:"https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&w=800&q=80"},
+      {id:5,name:"King Fish (Rawas)",category:"Fish",tag:"Chef's choice",price:520,unit:"500 g",area:"Worli",desc:"Mild flavour and a meaty, satisfying texture.",img:"https://images.unsplash.com/photo-1515003197210-e0cd7184f8b5?auto=format&fit=crop&w=800&q=80"},
+      {id:6,name:"Squid Rings",category:"Shellfish",tag:"Try something new",price:360,unit:"500 g",area:"Sassoon Dock",desc:"A tasty choice for quick stir-fries and snacks.",img:"https://images.unsplash.com/photo-1599084993091-1cb5c0721cc6?auto=format&fit=crop&w=800&q=80"},
+      {id:7,name:"Indian Mackerel (Bangda)",category:"Fish",tag:"Everyday pick",price:240,unit:"500 g",area:"Mahim",desc:"A bold-flavoured favourite for home cooking.",img:"https://images.unsplash.com/photo-1498654200943-1088dd4438ae?auto=format&fit=crop&w=800&q=80"},
+      {id:8,name:"Crab",category:"Shellfish",tag:"Weekend special",price:650,unit:"500 g",area:"Worli",desc:"A seafood treat for a memorable dinner.",img:"https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=800&q=80"}
+    ];
+    let activeCategory = "All";
+    let cart = JSON.parse(localStorage.getItem("msm-cart") || "{}");
+    let liked = new Set();
+    const money = n => "₹" + n.toLocaleString("en-IN");
+    const productGrid = document.getElementById("productGrid");
+    const toastEl = document.getElementById("toast");
+    let toastTimer;
+    function toast(message){
+      toastEl.textContent = message; toastEl.classList.add("show");
+      clearTimeout(toastTimer); toastTimer=setTimeout(()=>toastEl.classList.remove("show"),2600);
+    }
+    function renderProducts(){
+      const q = document.getElementById("searchInput").value.trim().toLowerCase();
+      const shown = products.filter(p => (activeCategory==="All" || p.category===activeCategory) &&
+        [p.name,p.category,p.area,p.desc].some(s=>s.toLowerCase().includes(q)));
+      if(!shown.length){productGrid.innerHTML='<div class="empty-state"><div style="font-size:32px;margin-bottom:8px">🐟</div><strong>No seafood found</strong><p style="font-size:12px;margin-top:6px">Try another search or category.</p></div>';return;}
+      productGrid.innerHTML = shown.map(p=>`
+        <article class="product-card">
+          <div class="product-image"><img loading="lazy" src="${p.img}" alt="${p.name}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80'">
+            <span class="product-tag">${p.tag}</span>
+            <button class="heart-btn ${liked.has(p.id)?'liked':''}" data-like="${p.id}" aria-label="Save ${p.name}">${liked.has(p.id)?'♥':'♡'}</button>
+          </div>
+          <div class="product-info"><div class="product-meta"><span>📍 ${p.area}</span><span>${p.category}</span></div>
+            <h3>${p.name}</h3><p class="desc">${p.desc}</p>
+            <div class="product-bottom"><div class="price">${money(p.price)} <small>/ ${p.unit}</small></div><button class="add-btn" data-add="${p.id}" aria-label="Add ${p.name} to basket">+</button></div>
+          </div>
+        </article>`).join("");
+    }
+    function saveCart(){localStorage.setItem("msm-cart",JSON.stringify(cart));}
+    function addToCart(id){cart[id]=(cart[id]||0)+1;saveCart();renderCart();toast(products.find(p=>p.id===id).name+" added to basket");}
+    function cartQty(){return Object.values(cart).reduce((a,b)=>a+b,0);}
+    function renderCart(){
+      const items=products.filter(p=>cart[p.id]);
+      document.getElementById("cartCount").textContent=cartQty();
+      document.getElementById("cartTitleCount").textContent="("+cartQty()+")";
+      const subtotal=items.reduce((sum,p)=>sum+p.price*cart[p.id],0);
+      document.getElementById("cartSubtotal").textContent=money(subtotal);
+      document.getElementById("checkoutBtn").disabled=items.length===0;
+      document.getElementById("checkoutBtn").style.opacity=items.length===0?".55":"1";
+      document.getElementById("cartItems").innerHTML=items.length?items.map(p=>`
+        <div class="cart-item"><img src="${p.img}" alt="${p.name}" onerror="this.src='https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=200&q=70'">
+          <div><h4>${p.name}</h4><div class="unit">${money(p.price)} / ${p.unit}</div>
+            <div class="qty-controls"><button data-qty="${p.id}" data-delta="-1" aria-label="Remove one ${p.name}">−</button><span>${cart[p.id]}</span><button data-qty="${p.id}" data-delta="1" aria-label="Add one ${p.name}">+</button></div>
+          </div><div class="cart-item-total">${money(p.price*cart[p.id])}</div>
+        </div>`).join(""):'<div class="cart-empty"><div class="basket">🧺</div><strong>Your basket is waiting.</strong><p style="font-size:11px;margin-top:8px">Add a few coastal favourites to get started.</p></div>';
+    }
+    function openCart(){document.getElementById("cartDrawer").classList.add("open");document.getElementById("overlay").classList.add("show");document.body.style.overflow="hidden";}
+    function closeCart(){document.getElementById("cartDrawer").classList.remove("open");document.getElementById("overlay").classList.remove("show");document.body.style.overflow="";}
+    document.getElementById("categoryList").addEventListener("click",e=>{
+      const btn=e.target.closest("[data-category]");if(!btn)return;
+      activeCategory=btn.dataset.category;
+      document.querySelectorAll("[data-category]").forEach(b=>b.classList.toggle("active",b===btn));
+      renderProducts();
+    });
+    document.getElementById("searchInput").addEventListener("input",renderProducts);
+    productGrid.addEventListener("click",e=>{
+      const add=e.target.closest("[data-add]");if(add)addToCart(Number(add.dataset.add));
+      const like=e.target.closest("[data-like]");if(like){const id=Number(like.dataset.like);liked.has(id)?liked.delete(id):liked.add(id);renderProducts();toast(liked.has(id)?"Saved to your favourites":"Removed from favourites");}
+    });
+    document.getElementById("cartItems").addEventListener("click",e=>{
+      const btn=e.target.closest("[data-qty]");if(!btn)return;
+      const id=Number(btn.dataset.qty);cart[id]=(cart[id]||0)+Number(btn.dataset.delta);
+      if(cart[id]<=0)delete cart[id];saveCart();renderCart();
+    });
+    document.getElementById("cartOpen").addEventListener("click",openCart);
+    document.getElementById("cartClose").addEventListener("click",closeCart);
+    document.getElementById("overlay").addEventListener("click",closeCart);
+    document.getElementById("checkoutBtn").addEventListener("click",()=>{
+      if(!cartQty())return;
+      document.getElementById("modalBackdrop").classList.add("show");
+    });
+    function closeModal(){document.getElementById("modalBackdrop").classList.remove("show");}
+    document.getElementById("confirmDemo").addEventListener("click",()=>{closeModal();closeCart();toast("Thanks for exploring the demo! No order was placed.");});
+    document.getElementById("backToShop").addEventListener("click",closeModal);
+    document.getElementById("modalBackdrop").addEventListener("click",e=>{if(e.target.id==="modalBackdrop")closeModal();});
+    document.getElementById("menuToggle").addEventListener("click",()=>document.getElementById("navLinks").classList.toggle("show"));
+    document.querySelectorAll("#navLinks a").forEach(a=>a.addEventListener("click",()=>document.getElementById("navLinks").classList.remove("show")));
+    document.getElementById("vendorToggle").addEventListener("click",()=>{
+      const form=document.getElementById("vendorForm");form.classList.toggle("open");
+      document.getElementById("vendorToggle").innerHTML=form.classList.contains("open")?"Hide form ↑":"Register interest <span>↗</span>";
+      if(form.classList.contains("open"))form.scrollIntoView({behavior:"smooth",block:"nearest"});
+    });
+    document.getElementById("vendorForm").addEventListener("submit",e=>{
+      e.preventDefault();toast("Thanks, "+document.getElementById("vendorName").value+"! Demo form submitted locally.");
+      e.target.reset();document.getElementById("vendorForm").classList.remove("open");
+      document.getElementById("vendorToggle").innerHTML="Register interest <span>↗</span>";
+    });
+    document.querySelectorAll("[data-footer-category]").forEach(a=>a.addEventListener("click",()=>{
+      activeCategory=a.dataset.footerCategory;
+      document.querySelectorAll("[data-category]").forEach(b=>b.classList.toggle("active",b.dataset.category===activeCategory));
+      renderProducts();
+    }));
+    document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();closeModal();}});
+    renderProducts();renderCart();
+  </script>
+</body>
+</html>
